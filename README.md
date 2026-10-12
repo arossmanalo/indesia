@@ -7,7 +7,7 @@ cannons, mages and frost towers along the kingdom's last road, upgrade them into
 specializations, and stop armored knights, spectral wraiths and winged swarms from breaking
 through.
 
-> **Status:** early development (milestone M0: foundation).
+> **Status:** in development. Playable locally: campaign map 1, guest accounts and verified leaderboards.
 
 ## Highlights (planned for v1)
 
@@ -33,7 +33,10 @@ state only through commands. That makes every game replayable from its command l
 powers server-verified leaderboards (and, later, lockstep multiplayer). ESLint enforces these
 rules inside `packages/sim`.
 
-Hosting: Vercel (static client + API function) with Neon Postgres.
+Hosting: Vercel (static client + API function) with Neon Postgres, Drizzle ORM and Better Auth
+(guest-first accounts, optional GitHub/Google linking). Submitted scores carry the full command
+log; the server re-runs the simulation and only stores results it reproduces. Each
+`SIM_VERSION` is its own leaderboard season.
 
 ## Getting started
 
@@ -44,8 +47,9 @@ pnpm install
 pnpm dev          # client on http://localhost:5173, API on http://localhost:8787/api
 ```
 
-Copy `.env.example` to `.env` and set `DATABASE_URL` to use a real database locally;
-without it the API runs with the database reported as `unconfigured`.
+The API works without any setup: when `DATABASE_URL` is empty it runs an embedded Postgres
+(PGlite) stored in `apps/api/.data`. Copy `.env.example` to `.env` to point it at a real
+database or to enable GitHub/Google sign-in.
 
 | Script              | Does                                            |
 | ------------------- | ----------------------------------------------- |
