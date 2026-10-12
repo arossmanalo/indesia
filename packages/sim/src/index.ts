@@ -13,4 +13,5 @@ export * from './replay';
 export * from './state';
 export * from './step';
 export { currentStats, pickTargets } from './systems/towers';
+export * from './validate';
 export * from './version';
