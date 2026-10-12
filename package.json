@@ -16,7 +16,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint .",
-    "typecheck": "pnpm -r typecheck && tsc -p tsconfig.json",
+    "typecheck": "pnpm -r typecheck && tsc -p tsconfig.json && tsc -p tools",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },

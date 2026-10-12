@@ -1,0 +1,19 @@
+{
+  "id": "meadow",
+  "name": "Kingsroad Meadow",
+  "description": "The horde's scouts probe the open fields of the old king's road.",
+  "startingGold": 200,
+  "waves": [
+    { "bonus": 20, "groups": [{ "enemy": "grunt", "count": 6, "interval": 1.5 }] },
+    { "bonus": 25, "groups": [{ "enemy": "grunt", "count": 10, "interval": 1.2 }] },
+    { "bonus": 30, "groups": [{ "enemy": "grunt", "count": 14, "interval": 1 }] },
+    {
+      "bonus": 35,
+      "groups": [
+        { "enemy": "grunt", "count": 10, "interval": 0.8 },
+        { "enemy": "grunt", "count": 8, "interval": 0.6, "delay": 12 }
+      ]
+    },
+    { "bonus": 50, "groups": [{ "enemy": "grunt", "count": 30, "interval": 0.5 }] }
+  ]
+}
