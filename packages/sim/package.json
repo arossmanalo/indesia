@@ -8,7 +8,9 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "typecheck": "tsc -p tsconfig.json"
+    "replay": "tsx scripts/replay.ts",
+    "golden:update": "tsx scripts/golden.ts",
+    "typecheck": "tsc -p tsconfig.json && tsc -p scripts/tsconfig.json && tsc -p test/tsconfig.json"
   },
   "dependencies": {
     "zod": "4.6.6"
