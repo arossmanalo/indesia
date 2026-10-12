@@ -14,8 +14,10 @@
     "@fontsource/pixelify-sans": "5.3.0",
     "@indesia/shared": "workspace:*",
     "@indesia/sim": "workspace:*",
+    "better-auth": "1.7.7",
     "phaser": "4.2.1",
-    "preact": "11.0.1"
+    "preact": "11.0.1",
+    "zod": "4.6.6"
   },
   "devDependencies": {
     "@babel/core": "7.x",

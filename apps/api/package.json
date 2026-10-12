@@ -6,16 +6,22 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/dev.ts",
-    "typecheck": "tsc -p tsconfig.json"
+    "typecheck": "tsc -p tsconfig.json",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx src/db/migrate.ts"
   },
   "dependencies": {
+    "@electric-sql/pglite": "0.5.8",
     "@hono/node-server": "2.1.4",
     "@indesia/shared": "workspace:*",
     "@indesia/sim": "workspace:*",
     "@neondatabase/serverless": "1.2.0",
+    "better-auth": "1.7.7",
+    "drizzle-orm": "0.45.4",
     "hono": "4.13.13"
   },
   "devDependencies": {
+    "drizzle-kit": "0.31.11",
     "tsx": "4.23.15"
   }
 }
