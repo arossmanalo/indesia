@@ -1,0 +1,61 @@
+import type { TowerDef } from './schema';
+
+export const TOWER_DEFS: TowerDef[] = [
+  {
+    type: 'archer',
+    levels: [
+      {
+        name: 'Archer Post',
+        description: 'Fast single-target shots. Hits flying enemies.',
+        cost: 70,
+        damage: 6,
+        damageType: 'physical',
+        range: 3,
+        cooldown: 0.8,
+        projectileSpeed: 12,
+        targetsAir: true,
+        targetsGround: true,
+      },
+      {
+        name: 'Archer Tower',
+        description: 'Sharper arrows and a faster draw.',
+        cost: 110,
+        damage: 10,
+        damageType: 'physical',
+        range: 3.3,
+        cooldown: 0.7,
+        projectileSpeed: 13,
+        targetsAir: true,
+        targetsGround: true,
+      },
+    ],
+    specs: [
+      {
+        name: 'Longbow Nest',
+        description: 'Huge range and heavy arrows with a chance to crit.',
+        cost: 200,
+        damage: 34,
+        damageType: 'physical',
+        range: 5,
+        cooldown: 1.4,
+        projectileSpeed: 16,
+        targetsAir: true,
+        targetsGround: true,
+        crit: { chance: 20, multiplier: 2 },
+      },
+      {
+        name: 'Ranger Lodge',
+        description: 'Looses three arrows at once, each at a different target.',
+        cost: 200,
+        damage: 12,
+        damageType: 'physical',
+        range: 3.5,
+        cooldown: 0.5,
+        projectileSpeed: 14,
+        targetsAir: true,
+        targetsGround: true,
+        shots: 3,
+      },
+    ],
+  },
+];
