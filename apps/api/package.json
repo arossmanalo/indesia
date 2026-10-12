@@ -1,0 +1,21 @@
+{
+  "name": "@indesia/api",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Indesia HTTP API (Hono), deployed as a Vercel Function.",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/dev.ts",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@hono/node-server": "2.1.4",
+    "@indesia/shared": "workspace:*",
+    "@indesia/sim": "workspace:*",
+    "@neondatabase/serverless": "1.2.0",
+    "hono": "4.13.13"
+  },
+  "devDependencies": {
+    "tsx": "4.23.15"
+  }
+}
