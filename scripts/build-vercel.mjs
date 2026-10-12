@@ -23,6 +23,9 @@ function pnpm(...args) {
 
 rmSync(out, { recursive: true, force: true });
 
+// Apply database migrations when a database is configured (Vercel injects DATABASE_URL).
+if (process.env.DATABASE_URL) pnpm('--filter', '@indesia/api', 'db:migrate');
+
 pnpm('--filter', '@indesia/client', 'build');
 cpSync(join(root, 'apps', 'client', 'dist'), join(out, 'static'), { recursive: true });
 
@@ -35,6 +38,8 @@ await build({
   format: 'esm',
   target: 'node24',
   sourcemap: true,
+  // The embedded database is for local development only.
+  external: ['@electric-sql/pglite', 'drizzle-orm/pglite', 'drizzle-orm/pglite/*'],
   // Some CommonJS dependencies call require(); give the ESM bundle one.
   banner: {
     js: "import { createRequire } from 'node:module'; const require = createRequire(import.meta.url);",
