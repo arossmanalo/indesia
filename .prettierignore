@@ -2,4 +2,5 @@ pnpm-lock.yaml
 .vercel
 dist
 coverage
+packages/sim/replays
 **/levels/*/map.json

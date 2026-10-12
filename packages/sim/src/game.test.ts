@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest';
+import { playBotGame } from './bot';
 import { applyCommand } from './commands';
 import { enemyStats, towerStats } from './content/compiled';
 import { getLevel } from './levels';
-import { clearEvents, step } from './step';
+import { runReplay } from './replay';
+import { clearEvents, hashState, step } from './step';
 import { createGame, type Game } from './state';
 
 const level = getLevel('meadow')!;
@@ -129,5 +131,50 @@ describe('combat', () => {
     expect(game.state.stats.killGold).toBe(
       game.state.stats.enemiesKilled * enemyStats('grunt').bounty,
     );
+  });
+});
+
+describe('determinism', () => {
+  const bot = { mix: ['archer' as const], maxTowers: 6, maxLevel: 3, callEarly: true };
+
+  it('replays reproduce the live game exactly', () => {
+    const replay = playBotGame(level, 1234, bot);
+    const a = runReplay(level, replay);
+    const b = runReplay(level, replay);
+    expect(a.ok).toBe(true);
+    expect(a).toEqual(b);
+  });
+
+  it('matches stepping the game by hand', () => {
+    const replay = playBotGame(level, 99, bot);
+    const game = createGame(level, replay.seed);
+    let i = 0;
+    while (game.state.status === 'playing') {
+      while (replay.commands[i]?.tick === game.state.tick) {
+        const { tick: _t, ...cmd } = replay.commands[i++]!;
+        applyCommand(game, cmd);
+      }
+      step(game);
+      clearEvents(game.state);
+    }
+    const result = runReplay(level, replay);
+    expect(result.ok && result.outcome.hash).toBe(hashState(game.state));
+  });
+
+  it('rejects tampered replays', () => {
+    const replay = playBotGame(level, 5, bot);
+    const build = replay.commands.findIndex((c) => c.type === 'build');
+    const forged = JSON.parse(JSON.stringify(replay)) as typeof replay;
+    forged.commands[build] = {
+      ...forged.commands[build]!,
+      type: 'build',
+      tower: 'archer',
+      tx: 4,
+      ty: 2,
+    };
+    expect(runReplay(level, forged)).toMatchObject({ ok: false });
+
+    const wrongLevel = { ...replay, levelHash: 'deadbeef' };
+    expect(runReplay(level, wrongLevel)).toEqual({ ok: false, reason: 'level content mismatch' });
   });
 });

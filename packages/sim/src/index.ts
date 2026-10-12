@@ -1,12 +1,15 @@
+export * from './bot';
 export * from './commands';
 export * from './content/compiled';
 export * from './content/schema';
+export * from './golden';
 export { ENEMY_DEFS } from './content/enemies';
 export { TOWER_DEFS } from './content/towers';
 export { ECONOMY } from './content/economy';
 export * from './level';
 export * from './levels';
 export * from './math';
+export * from './replay';
 export * from './state';
 export * from './step';
 export { currentStats, pickTargets } from './systems/towers';
