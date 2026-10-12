@@ -1,7 +1,14 @@
 import { useEffect, useState } from 'preact/hooks';
 import { getLevel } from '@indesia/sim';
-import { nextLevelId, retryLevel, showLevels, startLevel, togglePause } from '../app/actions';
-import { app } from '../app/state';
+import {
+  nextLevelId,
+  retryLevel,
+  showLeaderboard,
+  showLevels,
+  startLevel,
+  togglePause,
+} from '../app/actions';
+import { app, type SubmitStatus } from '../app/state';
 import { Button, Stars } from './components';
 import { useStore } from './store';
 
@@ -62,7 +69,21 @@ export function PauseOverlay() {
   );
 }
 
+function SubmitLine({ status }: { status: SubmitStatus }) {
+  switch (status.state) {
+    case 'pending':
+      return <p class="muted">Verifying your victory…</p>;
+    case 'queued':
+      return <p class="muted">Saved on this device · will be verified when you're back online</p>;
+    case 'verified':
+      return <p class="verified">Verified · rank #{status.rank} this season</p>;
+    case 'rejected':
+      return <p class="muted">Not ranked: {status.reason}</p>;
+  }
+}
+
 export function ResultOverlay() {
+  const submit = useStore(app, (s) => s.submit);
   const result = useStore(app, (s) => s.result);
   if (!result) return null;
   const won = result.status === 'won';
@@ -80,6 +101,7 @@ export function ResultOverlay() {
               {result.newBest && <span class="chip">New best</span>}
             </p>
             <p class="muted">{result.lives} lives left</p>
+            {submit && <SubmitLine status={submit.status} />}
           </>
         ) : (
           <p class="muted">Rethink your defenses and try again.</p>
@@ -93,6 +115,11 @@ export function ResultOverlay() {
           <Button variant={won ? 'default' : 'primary'} onClick={retryLevel}>
             {won ? 'Replay' : 'Retry'}
           </Button>
+          {won && (
+            <Button variant="ghost" onClick={() => showLeaderboard(result.levelId)}>
+              Leaderboard
+            </Button>
+          )}
           <Button variant="ghost" onClick={showLevels}>
             Map select
           </Button>
