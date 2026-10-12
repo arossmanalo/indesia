@@ -157,3 +157,20 @@ describe('shamans', () => {
     expect(grunt.hp).toBeGreaterThan(10);
   });
 });
+
+describe('wave scaling', () => {
+  it('scales enemy health by the wave hpPct', async () => {
+    const { compileLevel, getLevelMap } = await import('./index');
+    const scaled = compileLevel(getLevelMap('meadow'), {
+      id: 'scaled',
+      name: 'Scaled',
+      description: 'test',
+      startingGold: 100,
+      waves: [{ bonus: 0, hpPct: 150, groups: [{ enemy: 'grunt', count: 1, interval: 1 }] }],
+    });
+    const game = createGame(scaled, 1);
+    applyCommand(game, { type: 'callWave' });
+    run(game, 1);
+    expect(game.state.enemies[0]!.maxHp).toBe(60);
+  });
+});

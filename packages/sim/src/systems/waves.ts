@@ -18,16 +18,18 @@ export function updateWaves(game: Game): void {
   const { state, level } = game;
 
   for (const cursor of state.spawns) {
-    const group = level.waves[cursor.wave]!.groups[cursor.group]!;
+    const wave = level.waves[cursor.wave]!;
+    const group = wave.groups[cursor.group]!;
     while (cursor.spawned < group.count && state.tick >= cursor.nextTick) {
       const stats = enemyStats(group.enemy);
       const path = level.paths[group.path]!;
       const pos = pointOnPath(path, 0, 0);
+      const hp = Math.max(1, Math.trunc((stats.hp * wave.hpPct) / 100));
       state.enemies.push({
         id: state.nextId++,
         type: group.enemy,
-        hp: stats.hp,
-        maxHp: stats.hp,
+        hp,
+        maxHp: hp,
         path: group.path,
         segment: pos.segment,
         progress: 0,

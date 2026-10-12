@@ -57,6 +57,8 @@ export const WaveGroupDef = z.object({
 
 export const WaveDef = z.object({
   groups: z.array(WaveGroupDef).min(1),
+  /** Enemy health for this wave as a percentage of their base health. */
+  hpPct: z.number().int().min(10).max(2000).default(100),
   /** Gold awarded once every enemy of the wave is gone. */
   bonus: z.number().int().nonnegative(),
 });
@@ -99,6 +101,7 @@ export interface CompiledGroup {
 
 export interface CompiledWave {
   groups: CompiledGroup[];
+  hpPct: number;
   bonus: number;
   enemyCount: number;
 }
@@ -179,7 +182,12 @@ export function compileLevel(mapJson: unknown, levelJson: unknown): Level {
         path: g.path,
       };
     });
-    return { groups, bonus: wave.bonus, enemyCount: groups.reduce((n, g) => n + g.count, 0) };
+    return {
+      groups,
+      hpPct: wave.hpPct,
+      bonus: wave.bonus,
+      enemyCount: groups.reduce((n, g) => n + g.count, 0),
+    };
   });
 
   const hash = new Hasher().str(JSON.stringify(map)).str(JSON.stringify(def)).hex();
