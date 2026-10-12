@@ -4,6 +4,7 @@ import './style.css';
 import './ui/icons.css';
 import { render } from 'preact';
 import { session } from './app/actions';
+import { startOnlineLoop } from './app/online';
 import { app } from './app/state';
 import { createPhaser } from './game/phaser';
 import { App } from './ui/App';
@@ -11,6 +12,7 @@ import { App } from './ui/App';
 const ui = document.getElementById('ui')!;
 session.phaser = createPhaser(document.getElementById('game')!, ui);
 render(<App />, ui);
+startOnlineLoop();
 
 // Pause automatically when the tab is hidden.
 document.addEventListener('visibilitychange', () => {
@@ -20,5 +22,7 @@ document.addEventListener('visibilitychange', () => {
 
 if (import.meta.env.DEV) {
   // Debug handle for the browser console during development.
-  (window as unknown as { indesia: unknown }).indesia = { app, session };
+  const handle = { app, session, sim: null as unknown };
+  (window as unknown as { indesia: unknown }).indesia = handle;
+  void import('@indesia/sim').then((sim) => (handle.sim = sim));
 }

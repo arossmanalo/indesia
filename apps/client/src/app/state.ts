@@ -3,7 +3,20 @@ import type { EnemyType, GameStatus, TargetMode, TowerType } from '@indesia/sim'
 import { createStore } from '../ui/store';
 import { loadSave } from './save';
 
-export type Screen = 'loading' | 'title' | 'levels' | 'battle';
+export type Screen = 'loading' | 'title' | 'levels' | 'leaderboard' | 'battle';
+
+export type SubmitStatus =
+  | { state: 'pending' }
+  | { state: 'queued' }
+  | { state: 'verified'; rank: number }
+  | { state: 'rejected'; reason: string };
+
+export interface Online {
+  status: 'connecting' | 'online' | 'offline';
+  name: string | null;
+  guest: boolean;
+  providers: ('github' | 'google')[];
+}
 
 export interface Hud {
   gold: number;
@@ -64,6 +77,11 @@ export interface AppState {
   result: Result | null;
   banner: { id: number; text: string } | null;
   toast: { id: number; text: string } | null;
+  online: Online;
+  /** Server verification of the last finished game. */
+  submit: { id: string; status: SubmitStatus } | null;
+  /** Level shown on the leaderboard screen. */
+  boardLevelId: string | null;
 }
 
 const save = loadSave();
@@ -81,6 +99,9 @@ export const app = createStore<AppState>({
   result: null,
   banner: null,
   toast: null,
+  online: { status: 'connecting', name: null, guest: true, providers: [] },
+  submit: null,
+  boardLevelId: null,
 });
 
 let messageId = 0;

@@ -10,6 +10,7 @@ import {
   type TowerType,
 } from '@indesia/sim';
 import { type GameController, randomSeed, type Speed } from '../game/controller';
+import { queueScore, sendTelemetry, syncSave } from './online';
 import { recordOutcome, writeSave } from './save';
 import { app, showToast } from './state';
 
@@ -23,8 +24,35 @@ export function showTitle(): void {
   app.set({ screen: 'title' });
 }
 
+function reportGame(controller: GameController, status: 'won' | 'lost' | 'quit'): void {
+  const { state } = controller;
+  sendTelemetry({
+    kind: 'game_end',
+    levelId: controller.level.id,
+    status,
+    wave: state.wavesStarted,
+    ticks: state.tick,
+    livesLostPerWave: state.stats.livesLostPerWave,
+    towersBuilt: state.stats.towersBuilt,
+  });
+}
+
+export function showLeaderboard(levelId: string | null = app.get().levelId ?? LEVELS[0]!.id): void {
+  showLevels();
+  app.set({ screen: 'leaderboard', boardLevelId: levelId });
+}
+
 export function showLevels(): void {
   const phaser = session.phaser;
+  const { controller } = session;
+  if (
+    controller &&
+    !app.get().result &&
+    controller.state.status === 'playing' &&
+    controller.state.tick > 0
+  ) {
+    reportGame(controller, 'quit');
+  }
   if (phaser?.scene.isActive('battle')) {
     phaser.scene.stop('battle');
     phaser.scene.start('menu');
@@ -74,8 +102,12 @@ export function finishGame(controller: GameController): void {
   const levelId = controller.level.id;
   const { save, newBest } = recordOutcome(app.get().save, levelId, outcome);
   writeSave(save);
+  reportGame(controller, outcome.status === 'won' ? 'won' : 'lost');
+  // Victories go to the server for verification; the queue survives being offline.
+  const submitId = outcome.status === 'won' ? queueScore(controller.replay()) : null;
   app.set({
     save,
+    submit: submitId ? { id: submitId, status: { state: 'pending' } } : null,
     placing: null,
     selectedId: null,
     selected: null,
@@ -88,6 +120,7 @@ export function finishGame(controller: GameController): void {
       newBest,
     },
   });
+  void syncSave();
 }
 
 function issue(cmd: Command): boolean {
