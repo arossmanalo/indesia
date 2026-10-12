@@ -1,0 +1,24 @@
+{
+  "name": "@indesia/client",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Indesia game client: Phaser renders the world, Preact renders the UI overlay.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@indesia/shared": "workspace:*",
+    "@indesia/sim": "workspace:*",
+    "phaser": "4.2.1",
+    "preact": "11.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "7.x",
+    "@preact/preset-vite": "2.10.6",
+    "vite": "8.3.4"
+  }
+}
