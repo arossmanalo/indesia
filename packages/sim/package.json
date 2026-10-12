@@ -1,0 +1,13 @@
+{
+  "name": "@indesia/sim",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Deterministic, engine-free game simulation shared by the client and the server.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  }
+}
