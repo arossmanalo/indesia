@@ -4,3 +4,5 @@ dist
 coverage
 packages/sim/replays
 **/levels/*/map.json
+apps/client/public/assets
+apps/client/src/ui/icons.css

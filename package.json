@@ -18,7 +18,9 @@
     "lint": "eslint .",
     "typecheck": "pnpm -r typecheck && tsc -p tsconfig.json && tsc -p tools",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "art": "tsx tools/art/generate.ts",
+    "map": "tsx tools/maps/ascii-to-tiled.ts"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
