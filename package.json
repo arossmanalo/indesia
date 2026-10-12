@@ -1,0 +1,34 @@
+{
+  "name": "indesia",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Indesia: a pixel-art fantasy tower defense game for the browser.",
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@12.11.2",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "pnpm --parallel --filter @indesia/client --filter @indesia/api dev",
+    "build": "pnpm --filter @indesia/client build",
+    "build:vercel": "node scripts/build-vercel.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "typecheck": "pnpm -r typecheck && tsc -p tsconfig.json",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "24.x",
+    "esbuild": "0.28.2",
+    "eslint": "10.12.0",
+    "globals": "17.13.0",
+    "prettier": "3.9.10",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.1",
+    "vitest": "5.0.3"
+  }
+}
