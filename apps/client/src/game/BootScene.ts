@@ -1,31 +1,29 @@
 import Phaser from 'phaser';
-import { TILE, VIEW_HEIGHT, VIEW_WIDTH } from './constants';
+import { getLevelMap, LEVELS } from '@indesia/sim';
+import { app } from '../app/state';
 
 export class BootScene extends Phaser.Scene {
   constructor() {
     super('boot');
   }
 
+  preload(): void {
+    this.load.image('terrain', '/assets/terrain.png');
+    this.load.atlas('sprites', '/assets/sprites.png', '/assets/sprites.json');
+    for (const level of LEVELS) {
+      this.load.tilemapTiledJSON(`map-${level.id}`, getLevelMap(level.id) as object);
+    }
+  }
+
   create(): void {
-    const grid = this.add.graphics();
-    grid.lineStyle(1, 0x231f30, 1);
-    for (let x = 0; x <= VIEW_WIDTH; x += TILE) grid.lineBetween(x, 0, x, VIEW_HEIGHT);
-    for (let y = 0; y <= VIEW_HEIGHT; y += TILE) grid.lineBetween(0, y, VIEW_WIDTH, y);
-
-    this.add
-      .text(VIEW_WIDTH / 2, VIEW_HEIGHT / 2 - 16, 'INDESIA', {
-        fontFamily: 'monospace',
-        fontSize: '48px',
-        color: '#f2c14e',
-      })
-      .setOrigin(0.5);
-
-    this.add
-      .text(VIEW_WIDTH / 2, VIEW_HEIGHT / 2 + 28, 'The last road must hold.', {
-        fontFamily: 'monospace',
-        fontSize: '14px',
-        color: '#8a7f9e',
-      })
-      .setOrigin(0.5);
+    // Phaser text renders to a canvas once, so the pixel font must be ready first.
+    const fonts = Promise.all([
+      document.fonts.load('10px "Pixelify Sans"'),
+      document.fonts.load('bold 10px "Pixelify Sans"'),
+    ]).catch(() => undefined);
+    void fonts.then(() => {
+      this.scene.start('menu');
+      app.set({ screen: 'title' });
+    });
   }
 }
