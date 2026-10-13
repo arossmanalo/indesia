@@ -10,7 +10,7 @@
     "node": ">=24"
   },
   "scripts": {
-    "dev": "pnpm --parallel --filter @indesia/client --filter @indesia/api dev",
+    "dev": "node scripts/dev.mjs",
     "build": "pnpm --filter @indesia/client build",
     "build:vercel": "node scripts/build-vercel.mjs",
     "test": "vitest run",
