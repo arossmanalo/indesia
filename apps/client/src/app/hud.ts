@@ -22,6 +22,7 @@ function hudFor(c: GameController): Hud {
   const counting = state.nextWaveIn > 0;
   return {
     gold: state.gold,
+    towers: state.towers.length,
     lives: state.lives,
     wave: state.wavesStarted,
     waves: level.waves.length,

@@ -16,6 +16,7 @@ import { Button, Sprite } from './components';
 import { Banner, PauseOverlay, ResultOverlay } from './Overlays';
 import { useStore } from './store';
 import { TowerPanel } from './TowerPanel';
+import { Tutorial } from './Tutorial';
 
 function useBattleKeys(): void {
   useEffect(() => {
@@ -163,6 +164,7 @@ export function Battle() {
       <WavePanel />
       <BuildBar />
       <TowerPanel />
+      <Tutorial />
       {placing && <p class="hint panel">Tap a free tile to place · Esc to cancel</p>}
       <Banner />
       <PauseOverlay />

@@ -20,6 +20,7 @@ export interface Online {
 
 export interface Hud {
   gold: number;
+  towers: number;
   lives: number;
   wave: number;
   waves: number;

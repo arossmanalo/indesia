@@ -770,3 +770,63 @@ kbd {
   width: 1.1em;
   height: 1.1em;
 }
+
+/* --- First-play hints ---------------------------------------------------------------- */
+
+.coach {
+  position: absolute;
+  max-width: 19em;
+  padding: 0.5em 0.7em;
+  border-color: var(--gold);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.3em;
+  animation: coach 1.6s ease-in-out infinite;
+}
+
+.coach p {
+  margin: 0;
+  align-self: stretch;
+}
+
+.coach__skip {
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--gold);
+  font-size: 0.9em;
+  text-decoration: underline;
+}
+
+.coach--build {
+  bottom: 7.4em;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.coach--wave {
+  bottom: 6.2em;
+  right: 0.5em;
+}
+
+.coach--panel {
+  top: 3.6em;
+  right: 0.5em;
+}
+
+@keyframes coach {
+  50% {
+    box-shadow:
+      inset 2px 2px 0 var(--panel-hi),
+      inset -2px -2px 0 #17131f,
+      0 0 0 3px #f2c14e55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coach {
+    animation: none;
+  }
+}
