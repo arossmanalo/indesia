@@ -9,6 +9,7 @@ import {
   TOWER_TYPES,
   type TowerType,
 } from '@indesia/sim';
+import { audio } from '../audio/audio';
 import { type GameController, randomSeed, type Speed } from '../game/controller';
 import { queueScore, sendTelemetry, syncSave } from './online';
 import { recordOutcome, writeSave } from './save';
@@ -102,6 +103,7 @@ export function finishGame(controller: GameController): void {
   const levelId = controller.level.id;
   const { save, newBest } = recordOutcome(app.get().save, levelId, outcome);
   writeSave(save);
+  audio.play(outcome.status === 'won' ? 'victory' : 'defeat');
   reportGame(controller, outcome.status === 'won' ? 'won' : 'lost');
   // Victories go to the server for verification; the queue survives being offline.
   const submitId = outcome.status === 'won' ? queueScore(controller.replay()) : null;
@@ -127,7 +129,10 @@ function issue(cmd: Command): boolean {
   const c = session.controller;
   if (!c || app.get().result) return false;
   const result = c.issue(cmd);
-  if (!result.ok) showToast(result.reason[0]!.toUpperCase() + result.reason.slice(1));
+  if (!result.ok) {
+    audio.play('error');
+    showToast(result.reason[0]!.toUpperCase() + result.reason.slice(1));
+  }
   return result.ok;
 }
 

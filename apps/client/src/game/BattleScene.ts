@@ -13,10 +13,18 @@ import {
 import { build, finishGame, selectTower, session } from '../app/actions';
 import { syncHud } from '../app/hud';
 import { app, showBanner, showToast } from '../app/state';
+import { audio, type Sfx } from '../audio/audio';
 import { GameController } from './controller';
 import { TILE } from './constants';
 
 const px = (units: number) => units / UNITS_PER_PX;
+
+const FIRE_SOUNDS: Record<Tower['type'], Sfx> = {
+  archer: 'arrow',
+  cannon: 'cannon',
+  mage: 'bolt',
+  frost: 'shard',
+};
 
 const PROJECTILE_FRAMES: Record<Tower['type'], string> = {
   archer: 'proj-arrow',
@@ -167,28 +175,37 @@ export class BattleScene extends Phaser.Scene {
     const reducedShake = app.get().save.settings.reducedShake;
     for (const e of events) {
       switch (e.type) {
+        case 'fire':
+          audio.play(FIRE_SOUNDS[e.towerType]);
+          break;
         case 'hit':
+          if (e.splash === 0) audio.play('hit');
           this.spark(px(e.x), px(e.y));
           if (e.splash > 0) this.splash(px(e.x), px(e.y), px(e.splash), e.towerType);
           break;
         case 'kill':
+          audio.play('kill');
           this.floatText(px(e.x), px(e.y) - 10, `+${e.bounty}`, '#f2c14e');
           break;
         case 'leak':
+          audio.play('leak');
           if (!reducedShake) this.cameras.main.shake(140, 0.004);
           this.cameras.main.flash(120, 140, 30, 30);
           break;
         case 'build':
         case 'upgrade': {
+          audio.play(e.type);
           const t = this.controller.state.towers.find((tw) => tw.id === e.towerId);
           if (t) this.dust(px(t.x), px(t.y) + 10);
           break;
         }
         case 'sell':
+          audio.play('sell');
           this.dust((e.tx + 0.5) * TILE, (e.ty + 0.5) * TILE + 10);
           this.floatText((e.tx + 0.5) * TILE, e.ty * TILE, `+${e.refund}`, '#f2c14e');
           break;
         case 'waveStart':
+          audio.play('wave');
           showBanner(
             e.early
               ? `Wave ${e.wave + 1} · +${e.bonus} gold`
@@ -196,6 +213,7 @@ export class BattleScene extends Phaser.Scene {
           );
           break;
         case 'waveClear':
+          audio.play('waveClear');
           showToast(`Wave ${e.wave + 1} cleared · +${e.bonus} gold`);
           break;
         default:
