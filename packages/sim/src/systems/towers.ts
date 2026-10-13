@@ -80,7 +80,12 @@ export function updateTowers(game: Game): void {
         hitsAir: stats.targetsAir,
         hitsGround: stats.targetsGround,
       });
-      state.events.push({ type: 'fire', towerId: tower.id, projectileId: id });
+      state.events.push({
+        type: 'fire',
+        towerId: tower.id,
+        towerType: tower.type,
+        projectileId: id,
+      });
     }
     tower.cooldown = stats.cooldown - 1;
   }

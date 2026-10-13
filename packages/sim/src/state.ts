@@ -70,7 +70,7 @@ export type GameEvent =
   | { type: 'build'; towerId: number }
   | { type: 'upgrade'; towerId: number }
   | { type: 'sell'; towerId: number; tx: number; ty: number; refund: number }
-  | { type: 'fire'; towerId: number; projectileId: number }
+  | { type: 'fire'; towerId: number; towerType: TowerType; projectileId: number }
   | {
       type: 'hit';
       projectileId: number;
