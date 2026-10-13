@@ -3,4 +3,4 @@
  * replay (balance numbers, content, or sim bug fixes). Each bump starts a new leaderboard
  * season.
  */
-export const SIM_VERSION = 1;
+export const SIM_VERSION = 2;

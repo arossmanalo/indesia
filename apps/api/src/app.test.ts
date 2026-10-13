@@ -8,7 +8,7 @@ import {
   Save,
   SubmitScoreResponse,
 } from '@indesia/shared';
-import { getLevel, playBotGame, SIM_VERSION } from '@indesia/sim';
+import { getLevel, playBotGame, REFERENCE_BOT, SIM_VERSION } from '@indesia/sim';
 import { createAuth } from './auth';
 import { createApp, type Env, type Services } from './app';
 import { connect } from './db/client';
@@ -17,13 +17,7 @@ import { mergeStoredSaves, getSave } from './services/saves';
 
 const ORIGIN = 'http://localhost:5173';
 const level = getLevel('meadow')!;
-const winning = {
-  mix: ['archer' as const],
-  maxTowers: 4,
-  maxLevel: 3,
-  branch: { archer: 0 as const },
-  callEarly: false,
-};
+const winning = REFERENCE_BOT;
 
 let services: Services;
 let app: ReturnType<typeof createApp>;

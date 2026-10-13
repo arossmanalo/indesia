@@ -2,18 +2,232 @@
   "id": "meadow",
   "name": "Kingsroad Meadow",
   "description": "The horde's scouts probe the open fields of the old king's road.",
-  "startingGold": 200,
+  "startingGold": 250,
   "waves": [
-    { "bonus": 20, "groups": [{ "enemy": "grunt", "count": 6, "interval": 1.5 }] },
-    { "bonus": 25, "groups": [{ "enemy": "grunt", "count": 10, "interval": 1.2 }] },
-    { "bonus": 30, "groups": [{ "enemy": "grunt", "count": 14, "interval": 1 }] },
     {
-      "bonus": 35,
+      "bonus": 20,
+      "hpPct": 100,
       "groups": [
-        { "enemy": "grunt", "count": 10, "interval": 0.8 },
-        { "enemy": "grunt", "count": 8, "interval": 0.6, "delay": 12 }
+        {
+          "enemy": "grunt",
+          "count": 6,
+          "interval": 1.4
+        }
       ]
     },
-    { "bonus": 50, "groups": [{ "enemy": "grunt", "count": 30, "interval": 0.5 }] }
+    {
+      "bonus": 20,
+      "hpPct": 100,
+      "groups": [
+        {
+          "enemy": "grunt",
+          "count": 10,
+          "interval": 1.2
+        }
+      ]
+    },
+    {
+      "bonus": 25,
+      "hpPct": 100,
+      "groups": [
+        {
+          "enemy": "runner",
+          "count": 10,
+          "interval": 0.8
+        }
+      ]
+    },
+    {
+      "bonus": 25,
+      "hpPct": 110,
+      "groups": [
+        {
+          "enemy": "grunt",
+          "count": 10,
+          "interval": 0.9
+        },
+        {
+          "enemy": "runner",
+          "count": 8,
+          "interval": 0.6,
+          "delay": 6
+        }
+      ]
+    },
+    {
+      "bonus": 30,
+      "hpPct": 110,
+      "groups": [
+        {
+          "enemy": "bat",
+          "count": 8,
+          "interval": 1
+        }
+      ]
+    },
+    {
+      "bonus": 30,
+      "hpPct": 120,
+      "groups": [
+        {
+          "enemy": "grunt",
+          "count": 18,
+          "interval": 0.7
+        }
+      ]
+    },
+    {
+      "bonus": 35,
+      "hpPct": 120,
+      "groups": [
+        {
+          "enemy": "knight",
+          "count": 4,
+          "interval": 2
+        },
+        {
+          "enemy": "grunt",
+          "count": 10,
+          "interval": 0.8,
+          "delay": 3
+        }
+      ]
+    },
+    {
+      "bonus": 35,
+      "hpPct": 130,
+      "groups": [
+        {
+          "enemy": "runner",
+          "count": 16,
+          "interval": 0.5
+        },
+        {
+          "enemy": "bat",
+          "count": 6,
+          "interval": 1,
+          "delay": 4
+        }
+      ]
+    },
+    {
+      "bonus": 40,
+      "hpPct": 130,
+      "groups": [
+        {
+          "enemy": "knight",
+          "count": 8,
+          "interval": 1.5
+        }
+      ]
+    },
+    {
+      "bonus": 40,
+      "hpPct": 140,
+      "groups": [
+        {
+          "enemy": "grunt",
+          "count": 20,
+          "interval": 0.5
+        },
+        {
+          "enemy": "knight",
+          "count": 4,
+          "interval": 2,
+          "delay": 6
+        }
+      ]
+    },
+    {
+      "bonus": 45,
+      "hpPct": 150,
+      "groups": [
+        {
+          "enemy": "bat",
+          "count": 14,
+          "interval": 0.6
+        }
+      ]
+    },
+    {
+      "bonus": 45,
+      "hpPct": 150,
+      "groups": [
+        {
+          "enemy": "shaman",
+          "count": 3,
+          "interval": 3
+        },
+        {
+          "enemy": "grunt",
+          "count": 16,
+          "interval": 0.6,
+          "delay": 1
+        }
+      ]
+    },
+    {
+      "bonus": 50,
+      "hpPct": 160,
+      "groups": [
+        {
+          "enemy": "knight",
+          "count": 8,
+          "interval": 1.2
+        },
+        {
+          "enemy": "runner",
+          "count": 12,
+          "interval": 0.5,
+          "delay": 8
+        }
+      ]
+    },
+    {
+      "bonus": 50,
+      "hpPct": 170,
+      "groups": [
+        {
+          "enemy": "grunt",
+          "count": 24,
+          "interval": 0.45
+        },
+        {
+          "enemy": "bat",
+          "count": 10,
+          "interval": 0.7,
+          "delay": 5
+        },
+        {
+          "enemy": "knight",
+          "count": 5,
+          "interval": 1.5,
+          "delay": 9
+        }
+      ]
+    },
+    {
+      "bonus": 100,
+      "hpPct": 70,
+      "groups": [
+        {
+          "enemy": "warlord",
+          "count": 1,
+          "interval": 1
+        },
+        {
+          "enemy": "grunt",
+          "count": 20,
+          "interval": 0.6,
+          "delay": 2
+        },
+        {
+          "enemy": "shaman",
+          "count": 2,
+          "interval": 4,
+          "delay": 4
+        }
+      ]
+    }
   ]
 }
