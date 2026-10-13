@@ -49,6 +49,8 @@ export class BattleScene extends Phaser.Scene {
   private enemies = new Map<number, Phaser.GameObjects.Image>();
   private projectiles = new Map<number, Phaser.GameObjects.Image>();
   private prev = new Map<number, { x: number; y: number }>();
+  private lastHp = new Map<number, number>();
+  private flashUntil = new Map<number, number>();
   private below!: Phaser.GameObjects.Graphics;
   private above!: Phaser.GameObjects.Graphics;
   private ghost!: Phaser.GameObjects.Image;
@@ -69,6 +71,8 @@ export class BattleScene extends Phaser.Scene {
     this.enemies = new Map();
     this.projectiles = new Map();
     this.prev = new Map();
+    this.lastHp = new Map();
+    this.flashUntil = new Map();
     this.ghostTile = null;
     this.alpha = 1;
     this.ended = false;
@@ -177,14 +181,18 @@ export class BattleScene extends Phaser.Scene {
       switch (e.type) {
         case 'fire':
           audio.play(FIRE_SOUNDS[e.towerType]);
+          this.recoil(e.towerId);
           break;
         case 'hit':
           if (e.splash === 0) audio.play('hit');
           this.spark(px(e.x), px(e.y));
           if (e.splash > 0) this.splash(px(e.x), px(e.y), px(e.splash), e.towerType);
+          if (e.splash >= 1.4 * TILE * UNITS_PER_PX && !reducedShake)
+            this.cameras.main.shake(90, 0.0025);
           break;
         case 'kill':
           audio.play('kill');
+          this.puff(px(e.x), px(e.y) - 6);
           this.floatText(px(e.x), px(e.y) - 10, `+${e.bounty}`, '#f2c14e');
           break;
         case 'leak':
@@ -197,6 +205,7 @@ export class BattleScene extends Phaser.Scene {
         case 'build':
         case 'upgrade': {
           audio.play(e.type);
+          if (e.type === 'upgrade') this.bounce(e.towerId);
           const t = this.controller.state.towers.find((tw) => tw.id === e.towerId);
           if (t) this.dust(px(t.x), px(t.y) + 10);
           break;
@@ -225,6 +234,38 @@ export class BattleScene extends Phaser.Scene {
   }
 
   // --- effects -------------------------------------------------------------------------
+
+  private recoil(towerId: number): void {
+    const s = this.towers.get(towerId);
+    if (!s || this.tweens.isTweening(s)) return;
+    this.tweens.add({ targets: s, scaleY: 0.9, scaleX: 1.06, duration: 60, yoyo: true });
+  }
+
+  private bounce(towerId: number): void {
+    const s = this.towers.get(towerId);
+    if (!s) return;
+    this.tweens.killTweensOf(s);
+    s.setScale(1.3).setTint(0xffffff).setTintMode(Phaser.TintModes.FILL);
+    this.time.delayedCall(90, () => s.setTintMode(Phaser.TintModes.MULTIPLY).setTint(0xffffff));
+    this.tweens.add({ targets: s, scale: 1, duration: 300, ease: 'Back.easeOut' });
+  }
+
+  private puff(x: number, y: number): void {
+    for (let i = 0; i < 5; i++) {
+      const angle = (i / 5) * Math.PI * 2;
+      const c = this.add.circle(x, y, 3, 0xd8d0e0, 0.9).setDepth(9_600);
+      this.tweens.add({
+        targets: c,
+        x: x + Math.cos(angle) * 9,
+        y: y + Math.sin(angle) * 6 - 4,
+        scale: 1.8,
+        alpha: 0,
+        duration: 320,
+        ease: 'Quad.easeOut',
+        onComplete: () => c.destroy(),
+      });
+    }
+  }
 
   private spark(x: number, y: number): void {
     const s = this.add.image(x, y, 'sprites', 'icon-spark').setDepth(9_500).setScale(0.75);
@@ -316,6 +357,8 @@ export class BattleScene extends Phaser.Scene {
         sprite.destroy();
         sprites.delete(id);
         this.prev.delete(id);
+        this.lastHp.delete(id);
+        this.flashUntil.delete(id);
       }
     }
   }
@@ -329,7 +372,12 @@ export class BattleScene extends Phaser.Scene {
     this.sync(
       state.towers,
       this.towers,
-      (t) => this.add.image(px(t.x), px(t.y) - 4, 'sprites', towerFrame(t)),
+      (t) => {
+        const sprite = this.add.image(px(t.x), px(t.y) - 4, 'sprites', towerFrame(t));
+        sprite.setScale(0.4);
+        this.tweens.add({ targets: sprite, scale: 1, duration: 260, ease: 'Back.easeOut' });
+        return sprite;
+      },
       (t, s) => {
         s.setFrame(towerFrame(t)).setDepth(px(t.y));
         this.drawPips(t);
@@ -375,7 +423,15 @@ export class BattleScene extends Phaser.Scene {
     s.setDepth(pos.y + (stats.flying ? 500 : 0));
     if (prev && e.x !== prev.x) s.setFlipX(e.x < prev.x);
     if (e.type === 'warlord') s.setScale(1.4);
-    s.setTint(e.slowTicks > 0 ? 0x9fe0f0 : 0xffffff);
+    // Flash white for a moment whenever the enemy takes damage.
+    const last = this.lastHp.get(e.id);
+    if (last !== undefined && e.hp < last) this.flashUntil.set(e.id, time + 70);
+    this.lastHp.set(e.id, e.hp);
+    if ((this.flashUntil.get(e.id) ?? 0) > time) {
+      s.setTint(0xffffff).setTintMode(Phaser.TintModes.FILL);
+    } else {
+      s.setTintMode(Phaser.TintModes.MULTIPLY).setTint(e.slowTicks > 0 ? 0x9fe0f0 : 0xffffff);
+    }
 
     // Shadow and health bar.
     this.below.fillStyle(0x1a1423, 0.35);
