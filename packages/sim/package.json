@@ -11,7 +11,8 @@
     "replay": "tsx scripts/replay.ts",
     "golden:update": "tsx scripts/golden.ts",
     "typecheck": "tsc -p tsconfig.json && tsc -p scripts/tsconfig.json && tsc -p test/tsconfig.json",
-    "balance": "tsx scripts/balance.ts"
+    "balance": "tsx scripts/balance.ts",
+    "diagnose": "tsx scripts/diagnose.ts"
   },
   "dependencies": {
     "zod": "4.6.6"
