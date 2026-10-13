@@ -1,0 +1,13 @@
+; Grimspire Pass — map 3: the road switchbacks down the mountain
+TTTRR..TTTT..RRTTTTT
+S#################.R
+R................#.R
+RR################RR
+R.#....,.......T...R
+RR################.R
+T......".........#.T
+TT################.T
+R.#.......R.......TT
+RR#################E
+.......,......".....
+TTRR....TTTT....RRTT

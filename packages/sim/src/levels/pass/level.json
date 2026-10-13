@@ -1,0 +1,330 @@
+{
+  "id": "pass",
+  "name": "Grimspire Pass",
+  "description": "The road switchbacks down the mountain. The warlords lead the march themselves.",
+  "startingGold": 340,
+  "waves": [
+    {
+      "bonus": 20,
+      "hpPct": 120,
+      "groups": [
+        {
+          "enemy": "grunt",
+          "count": 12,
+          "interval": 0.9
+        }
+      ]
+    },
+    {
+      "bonus": 20,
+      "hpPct": 100,
+      "groups": [
+        {
+          "enemy": "runner",
+          "count": 8,
+          "interval": 0.8
+        }
+      ]
+    },
+    {
+      "bonus": 25,
+      "hpPct": 130,
+      "groups": [
+        {
+          "enemy": "grunt",
+          "count": 12,
+          "interval": 0.7
+        },
+        {
+          "enemy": "bat",
+          "count": 6,
+          "interval": 1,
+          "delay": 5
+        }
+      ]
+    },
+    {
+      "bonus": 25,
+      "hpPct": 110,
+      "groups": [
+        {
+          "enemy": "wraith",
+          "count": 8,
+          "interval": 1.2
+        }
+      ]
+    },
+    {
+      "bonus": 30,
+      "hpPct": 140,
+      "groups": [
+        {
+          "enemy": "knight",
+          "count": 6,
+          "interval": 1.6
+        },
+        {
+          "enemy": "grunt",
+          "count": 12,
+          "interval": 0.7,
+          "delay": 4
+        }
+      ]
+    },
+    {
+      "bonus": 30,
+      "hpPct": 140,
+      "groups": [
+        {
+          "enemy": "shaman",
+          "count": 2,
+          "interval": 4
+        },
+        {
+          "enemy": "runner",
+          "count": 16,
+          "interval": 0.45,
+          "delay": 1
+        }
+      ]
+    },
+    {
+      "bonus": 35,
+      "hpPct": 130,
+      "groups": [
+        {
+          "enemy": "bat",
+          "count": 12,
+          "interval": 0.8
+        }
+      ]
+    },
+    {
+      "bonus": 35,
+      "hpPct": 150,
+      "groups": [
+        {
+          "enemy": "wraith",
+          "count": 10,
+          "interval": 0.8
+        },
+        {
+          "enemy": "knight",
+          "count": 6,
+          "interval": 1.4,
+          "delay": 6
+        }
+      ]
+    },
+    {
+      "bonus": 40,
+      "hpPct": 160,
+      "groups": [
+        {
+          "enemy": "grunt",
+          "count": 30,
+          "interval": 0.4
+        },
+        {
+          "enemy": "shaman",
+          "count": 2,
+          "interval": 5,
+          "delay": 4
+        }
+      ]
+    },
+    {
+      "bonus": 80,
+      "hpPct": 70,
+      "groups": [
+        {
+          "enemy": "warlord",
+          "count": 1,
+          "interval": 1
+        },
+        {
+          "enemy": "grunt",
+          "count": 14,
+          "interval": 0.7,
+          "delay": 3
+        }
+      ]
+    },
+    {
+      "bonus": 45,
+      "hpPct": 170,
+      "groups": [
+        {
+          "enemy": "runner",
+          "count": 24,
+          "interval": 0.35
+        },
+        {
+          "enemy": "bat",
+          "count": 10,
+          "interval": 0.6,
+          "delay": 6
+        }
+      ]
+    },
+    {
+      "bonus": 45,
+      "hpPct": 170,
+      "groups": [
+        {
+          "enemy": "knight",
+          "count": 12,
+          "interval": 1
+        }
+      ]
+    },
+    {
+      "bonus": 50,
+      "hpPct": 180,
+      "groups": [
+        {
+          "enemy": "wraith",
+          "count": 16,
+          "interval": 0.6
+        },
+        {
+          "enemy": "shaman",
+          "count": 3,
+          "interval": 3,
+          "delay": 2
+        }
+      ]
+    },
+    {
+      "bonus": 50,
+      "hpPct": 180,
+      "groups": [
+        {
+          "enemy": "bat",
+          "count": 22,
+          "interval": 0.45
+        }
+      ]
+    },
+    {
+      "bonus": 55,
+      "hpPct": 190,
+      "groups": [
+        {
+          "enemy": "grunt",
+          "count": 30,
+          "interval": 0.35
+        },
+        {
+          "enemy": "knight",
+          "count": 8,
+          "interval": 1,
+          "delay": 6
+        }
+      ]
+    },
+    {
+      "bonus": 55,
+      "hpPct": 200,
+      "groups": [
+        {
+          "enemy": "wraith",
+          "count": 14,
+          "interval": 0.6
+        },
+        {
+          "enemy": "runner",
+          "count": 20,
+          "interval": 0.35,
+          "delay": 4
+        }
+      ]
+    },
+    {
+      "bonus": 60,
+      "hpPct": 210,
+      "groups": [
+        {
+          "enemy": "knight",
+          "count": 12,
+          "interval": 0.9
+        },
+        {
+          "enemy": "shaman",
+          "count": 4,
+          "interval": 2.5,
+          "delay": 3
+        }
+      ]
+    },
+    {
+      "bonus": 60,
+      "hpPct": 220,
+      "groups": [
+        {
+          "enemy": "bat",
+          "count": 20,
+          "interval": 0.4
+        },
+        {
+          "enemy": "wraith",
+          "count": 12,
+          "interval": 0.6,
+          "delay": 5
+        }
+      ]
+    },
+    {
+      "bonus": 70,
+      "hpPct": 230,
+      "groups": [
+        {
+          "enemy": "grunt",
+          "count": 36,
+          "interval": 0.3
+        },
+        {
+          "enemy": "knight",
+          "count": 10,
+          "interval": 0.9,
+          "delay": 4
+        },
+        {
+          "enemy": "shaman",
+          "count": 3,
+          "interval": 3,
+          "delay": 8
+        }
+      ]
+    },
+    {
+      "bonus": 200,
+      "hpPct": 170,
+      "groups": [
+        {
+          "enemy": "warlord",
+          "count": 2,
+          "interval": 8
+        },
+        {
+          "enemy": "knight",
+          "count": 8,
+          "interval": 1.2,
+          "delay": 3
+        },
+        {
+          "enemy": "wraith",
+          "count": 10,
+          "interval": 0.8,
+          "delay": 6
+        },
+        {
+          "enemy": "bat",
+          "count": 10,
+          "interval": 0.6,
+          "delay": 10
+        }
+      ]
+    }
+  ]
+}

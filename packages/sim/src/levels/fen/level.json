@@ -1,0 +1,339 @@
+{
+  "id": "fen",
+  "name": "Fenmarsh Crossing",
+  "description": "Two roads meet in the marsh, and the dead walk both of them.",
+  "startingGold": 300,
+  "waves": [
+    {
+      "bonus": 20,
+      "hpPct": 100,
+      "groups": [
+        {
+          "enemy": "grunt",
+          "count": 6,
+          "interval": 1.4,
+          "path": 0
+        }
+      ]
+    },
+    {
+      "bonus": 20,
+      "hpPct": 100,
+      "groups": [
+        {
+          "enemy": "grunt",
+          "count": 8,
+          "interval": 1.2,
+          "path": 1
+        }
+      ]
+    },
+    {
+      "bonus": 25,
+      "hpPct": 100,
+      "groups": [
+        {
+          "enemy": "runner",
+          "count": 5,
+          "interval": 0.9,
+          "path": 0
+        },
+        {
+          "enemy": "runner",
+          "count": 5,
+          "interval": 0.9,
+          "path": 1
+        }
+      ]
+    },
+    {
+      "bonus": 25,
+      "hpPct": 100,
+      "groups": [
+        {
+          "enemy": "wraith",
+          "count": 5,
+          "interval": 1.4,
+          "path": 0
+        }
+      ]
+    },
+    {
+      "bonus": 30,
+      "hpPct": 120,
+      "groups": [
+        {
+          "enemy": "grunt",
+          "count": 12,
+          "interval": 0.8,
+          "path": 1
+        },
+        {
+          "enemy": "wraith",
+          "count": 4,
+          "interval": 1.2,
+          "path": 0,
+          "delay": 4
+        }
+      ]
+    },
+    {
+      "bonus": 30,
+      "hpPct": 130,
+      "groups": [
+        {
+          "enemy": "bat",
+          "count": 12,
+          "interval": 0.8,
+          "path": 0
+        }
+      ]
+    },
+    {
+      "bonus": 35,
+      "hpPct": 120,
+      "groups": [
+        {
+          "enemy": "knight",
+          "count": 4,
+          "interval": 2,
+          "path": 1
+        },
+        {
+          "enemy": "wraith",
+          "count": 4,
+          "interval": 2,
+          "path": 0
+        }
+      ]
+    },
+    {
+      "bonus": 35,
+      "hpPct": 140,
+      "groups": [
+        {
+          "enemy": "shaman",
+          "count": 2,
+          "interval": 4,
+          "path": 0
+        },
+        {
+          "enemy": "grunt",
+          "count": 18,
+          "interval": 0.6,
+          "path": 0,
+          "delay": 1
+        }
+      ]
+    },
+    {
+      "bonus": 40,
+      "hpPct": 150,
+      "groups": [
+        {
+          "enemy": "runner",
+          "count": 14,
+          "interval": 0.45,
+          "path": 1
+        },
+        {
+          "enemy": "bat",
+          "count": 8,
+          "interval": 0.8,
+          "path": 0,
+          "delay": 3
+        }
+      ]
+    },
+    {
+      "bonus": 40,
+      "hpPct": 140,
+      "groups": [
+        {
+          "enemy": "wraith",
+          "count": 12,
+          "interval": 0.9,
+          "path": 0
+        },
+        {
+          "enemy": "wraith",
+          "count": 6,
+          "interval": 0.9,
+          "path": 1,
+          "delay": 5
+        }
+      ]
+    },
+    {
+      "bonus": 45,
+      "hpPct": 160,
+      "groups": [
+        {
+          "enemy": "knight",
+          "count": 10,
+          "interval": 1.2,
+          "path": 1
+        },
+        {
+          "enemy": "shaman",
+          "count": 2,
+          "interval": 5,
+          "path": 1,
+          "delay": 3
+        }
+      ]
+    },
+    {
+      "bonus": 45,
+      "hpPct": 170,
+      "groups": [
+        {
+          "enemy": "grunt",
+          "count": 20,
+          "interval": 0.45,
+          "path": 0
+        },
+        {
+          "enemy": "grunt",
+          "count": 20,
+          "interval": 0.45,
+          "path": 1
+        }
+      ]
+    },
+    {
+      "bonus": 50,
+      "hpPct": 170,
+      "groups": [
+        {
+          "enemy": "bat",
+          "count": 16,
+          "interval": 0.5,
+          "path": 1
+        },
+        {
+          "enemy": "wraith",
+          "count": 8,
+          "interval": 1,
+          "path": 0,
+          "delay": 4
+        }
+      ]
+    },
+    {
+      "bonus": 50,
+      "hpPct": 180,
+      "groups": [
+        {
+          "enemy": "knight",
+          "count": 8,
+          "interval": 1.2,
+          "path": 0
+        },
+        {
+          "enemy": "runner",
+          "count": 16,
+          "interval": 0.4,
+          "path": 1,
+          "delay": 5
+        }
+      ]
+    },
+    {
+      "bonus": 55,
+      "hpPct": 190,
+      "groups": [
+        {
+          "enemy": "shaman",
+          "count": 3,
+          "interval": 3,
+          "path": 0
+        },
+        {
+          "enemy": "wraith",
+          "count": 10,
+          "interval": 0.8,
+          "path": 0,
+          "delay": 1
+        },
+        {
+          "enemy": "grunt",
+          "count": 16,
+          "interval": 0.5,
+          "path": 1
+        }
+      ]
+    },
+    {
+      "bonus": 55,
+      "hpPct": 200,
+      "groups": [
+        {
+          "enemy": "bat",
+          "count": 14,
+          "interval": 0.5,
+          "path": 0
+        },
+        {
+          "enemy": "knight",
+          "count": 8,
+          "interval": 1.1,
+          "path": 1,
+          "delay": 3
+        }
+      ]
+    },
+    {
+      "bonus": 60,
+      "hpPct": 210,
+      "groups": [
+        {
+          "enemy": "wraith",
+          "count": 12,
+          "interval": 0.7,
+          "path": 1
+        },
+        {
+          "enemy": "runner",
+          "count": 18,
+          "interval": 0.35,
+          "path": 0,
+          "delay": 4
+        },
+        {
+          "enemy": "shaman",
+          "count": 2,
+          "interval": 4,
+          "path": 1,
+          "delay": 6
+        }
+      ]
+    },
+    {
+      "bonus": 120,
+      "hpPct": 90,
+      "groups": [
+        {
+          "enemy": "warlord",
+          "count": 1,
+          "interval": 1,
+          "path": 0
+        },
+        {
+          "enemy": "wraith",
+          "count": 10,
+          "interval": 0.9,
+          "path": 1,
+          "delay": 2
+        },
+        {
+          "enemy": "knight",
+          "count": 6,
+          "interval": 1.5,
+          "path": 0,
+          "delay": 6
+        }
+      ]
+    }
+  ]
+}
