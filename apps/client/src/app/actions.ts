@@ -1,4 +1,5 @@
 import type Phaser from 'phaser';
+import type { Settings } from '@indesia/shared';
 import {
   type Command,
   hasTower,
@@ -204,14 +205,31 @@ export function togglePause(): void {
 }
 
 export function setSpeed(speed: Speed): void {
+  updateSettings({ speed });
+}
+
+let settingsSync: number | undefined;
+
+/** Changes settings, saves them locally and (after a short pause) to the cloud. */
+export function updateSettings(patch: Partial<Settings>): void {
   const save = app.get().save;
   const next = {
     ...save,
-    settings: { ...save.settings, speed },
+    settings: { ...save.settings, ...patch },
     settingsUpdatedAt: new Date().toISOString(),
   };
   writeSave(next);
-  app.set({ speed, save: next });
+  app.set({ save: next, ...(patch.speed ? { speed: patch.speed } : {}) });
+  window.clearTimeout(settingsSync);
+  settingsSync = window.setTimeout(() => void syncSave(), 1500);
+}
+
+export function openSettings(): void {
+  app.set({ settingsOpen: true });
+}
+
+export function closeSettings(): void {
+  app.set({ settingsOpen: false });
 }
 
 export function cycleSpeed(): void {

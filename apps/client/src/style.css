@@ -724,3 +724,49 @@ kbd {
 .verified {
   color: var(--ok);
 }
+
+/* --- Settings ---------------------------------------------------------------------- */
+
+.overlay--top {
+  position: fixed;
+  z-index: 10;
+  font-size: 16px;
+}
+
+.settings {
+  align-items: stretch;
+  min-width: min(22em, 90vw);
+  text-align: left;
+}
+
+.setting {
+  display: grid;
+  grid-template-columns: 8em 1fr 2.5em;
+  align-items: center;
+  gap: 0.6em;
+}
+
+.setting output {
+  text-align: right;
+  color: var(--muted);
+}
+
+.setting .segmented {
+  grid-column: 2 / span 2;
+}
+
+.setting--check {
+  grid-template-columns: auto 1fr;
+  cursor: pointer;
+}
+
+.setting input[type='range'] {
+  accent-color: var(--accent);
+  width: 100%;
+}
+
+.setting input[type='checkbox'] {
+  accent-color: var(--accent);
+  width: 1.1em;
+  height: 1.1em;
+}

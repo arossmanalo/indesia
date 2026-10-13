@@ -82,6 +82,7 @@ export interface AppState {
   submit: { id: string; status: SubmitStatus } | null;
   /** Level shown on the leaderboard screen. */
   boardLevelId: string | null;
+  settingsOpen: boolean;
 }
 
 const save = loadSave();
@@ -102,6 +103,7 @@ export const app = createStore<AppState>({
   online: { status: 'connecting', name: null, guest: true, providers: [] },
   submit: null,
   boardLevelId: null,
+  settingsOpen: false,
 });
 
 let messageId = 0;

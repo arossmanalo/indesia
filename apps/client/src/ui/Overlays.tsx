@@ -2,6 +2,7 @@ import { useEffect, useState } from 'preact/hooks';
 import { getLevel } from '@indesia/sim';
 import {
   nextLevelId,
+  openSettings,
   retryLevel,
   showLeaderboard,
   showLevels,
@@ -61,6 +62,7 @@ export function PauseOverlay() {
           Resume
         </Button>
         <Button onClick={retryLevel}>Restart</Button>
+        <Button onClick={openSettings}>Settings</Button>
         <Button variant="ghost" onClick={showLevels}>
           Quit to map select
         </Button>

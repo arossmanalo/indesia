@@ -189,8 +189,10 @@ export class BattleScene extends Phaser.Scene {
           break;
         case 'leak':
           audio.play('leak');
-          if (!reducedShake) this.cameras.main.shake(140, 0.004);
-          this.cameras.main.flash(120, 140, 30, 30);
+          if (!reducedShake) {
+            this.cameras.main.shake(140, 0.004);
+            this.cameras.main.flash(120, 140, 30, 30);
+          }
           break;
         case 'build':
         case 'upgrade': {

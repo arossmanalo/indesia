@@ -1,5 +1,5 @@
 import { SIM_VERSION } from '@indesia/sim';
-import { showLeaderboard, showLevels } from '../app/actions';
+import { openSettings, showLeaderboard, showLevels } from '../app/actions';
 import { linkAccount, signOut } from '../app/online';
 import { app } from '../app/state';
 import { Button } from './components';
@@ -48,6 +48,7 @@ export function Title() {
           Play
         </Button>
         <Button onClick={() => showLeaderboard()}>Leaderboards</Button>
+        <Button onClick={openSettings}>Settings</Button>
       </div>
       <Account />
       <footer class="footnote">Tower defense · rules v{SIM_VERSION}</footer>

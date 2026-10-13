@@ -20,7 +20,7 @@ import { TowerPanel } from './TowerPanel';
 function useBattleKeys(): void {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.target instanceof HTMLInputElement || e.repeat) return;
+      if (e.target instanceof HTMLInputElement || e.repeat || app.get().settingsOpen) return;
       const n = Number(e.key);
       if (n >= 1 && n <= TOWER_TYPES.length) {
         beginPlacing(TOWER_TYPES[n - 1]!);
